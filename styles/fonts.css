@@ -1,0 +1,78 @@
+/* =========================================
+   Local Fonts: NewBlackTypeface
+   PLACEHOLDER: Put all .ttf files in /public/fonts
+   Uses Medium (500) as the boldest weight
+========================================= */
+
+/* UltraLight (200) */
+@font-face {
+  font-family: "NewBlackTypeface";
+  src: url("/fonts/NewBlackTypeface-UltraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Light (300) */
+@font-face {
+  font-family: "NewBlackTypeface";
+  src: url("/fonts/NewBlackTypeface-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular (400) */
+@font-face {
+  font-family: "NewBlackTypeface";
+  src: url("/fonts/NewBlackTypeface-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (500) — now treated as the boldest */
+@font-face {
+  font-family: "NewBlackTypeface";
+  src: url("/fonts/NewBlackTypeface-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --font-body: "NewBlackTypeface", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-heading: "NewBlackTypeface", system-ui, Arial, sans-serif;
+}
+
+/* ---------- Global Defaults ---------- */
+html {
+  font-family: var(--font-body);
+}
+
+body {
+  margin: 0;
+  background: #090b10;   /* cinematic dark background */
+  color: #e6e8ee;        /* soft light foreground */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;       /* use Medium as the boldest */
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+/* ---------- Utilities ---------- */
+.font-body    { font-family: var(--font-body); }
+.font-heading { font-family: var(--font-heading); }
+
+.weight-200 { font-weight: 200; }
+.weight-300 { font-weight: 300; }
+.weight-400 { font-weight: 400; }
+.weight-500 { font-weight: 500; } /* now your boldest weight */

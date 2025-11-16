@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Builds / caches
+dist/
+client/dist/
+.vite/
+client/.vite/
+.eslintcache
+
+# OS junk
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Logs
+*.log
+
+# Env
+.env
+.env.*
+!.env.example
