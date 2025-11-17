@@ -147,15 +147,28 @@ For me, design is intent made visible. It guides, informs, and connects in ways 
       className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden"
       aria-label="About me / Om mig"
     >
-      {/* Grain Overlay */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-soft-light"
-        style={{
-          backgroundImage: "url('/assets/textures/grain-light.png')",
-          backgroundSize: "auto",
-        }}
-      />
+      {/* Grain Overlay — resilient loader: try src/assets first, fall back to public `/assets` path */}
+      {(() => {
+        let grainUrl;
+        try {
+          // Prefer a build-time import if the texture is present under src/assets
+          grainUrl = new URL(`../assets/textures/grain-light.png`, import.meta.url).href;
+        } catch (e) {
+          // Fallback to the public folder path (served at runtime)
+          grainUrl = "/assets/textures/grain-light.png";
+        }
+
+        return (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-soft-light"
+            style={{
+              backgroundImage: grainUrl ? `url('${grainUrl}')` : undefined,
+              backgroundSize: "auto",
+            }}
+          />
+        );
+      })()}
 
       {/* Background Motion */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden>
