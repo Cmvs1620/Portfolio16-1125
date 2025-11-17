@@ -40,7 +40,7 @@ const projects = [
     tags: ["Graphic Design", "Motion", "CRM", "iGaming", "Branding"],
     image: "client/public/projects/paf/bill.png",
     gallery: [
-      "client/public/projects/paf/bill.png",
+      "Portfolio16-1125/client/public/projects/paf/bill.png",
       "/projects/paf/Intropaf.gif",
       "/projects/paf/phones.png",
       "/projects/paf/icon 2.png",
