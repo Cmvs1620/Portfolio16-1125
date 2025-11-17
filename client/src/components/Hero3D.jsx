@@ -101,8 +101,75 @@ function ModelGLB({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0], 
 /* --- AUTO DETECT --- */
 function ModelAuto(props) {
   const lower = (props.src || "").toLowerCase();
-  if (lower.endsWith(".glb") || lower.endsWith(".gltf")) return <ModelGLB {...props} />;
-  return null;
+  // Prefer a smart loader that tries GLTF first then falls back to OBJ parsing.
+  return <ModelSmart {...props} />;
+}
+
+/* --- Smart loader: try GLTF (including DRACO) then fall back to OBJ text parsing --- */
+function ModelSmart({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0], materialOverride, dracoPath = "/draco/", autoRotate, pivotFineTune }) {
+  const [object3d, setObject3d] = React.useState(null);
+
+  React.useEffect(() => {
+    let mounted = true;
+
+    async function loadModel() {
+      // Try GLTFLoader first (handles .glb and .gltf, with DRACO support)
+      try {
+        const loader = new GLTFLoader();
+        const draco = new DRACOLoader();
+        draco.setDecoderPath(dracoPath);
+        loader.setDRACOLoader(draco);
+        const gltf = await loader.loadAsync(src);
+        if (!mounted) return;
+        applyMaterialOverrides(gltf.scene, materialOverride);
+        setObject3d(gltf.scene);
+        return;
+      } catch (gltfErr) {
+        // GLTF failed — try to fetch as text and parse as OBJ
+        try {
+          const res = await fetch(src);
+          const text = await res.text();
+          if (!mounted) return;
+
+          // Heuristic: OBJ files contain lines starting with 'v ' (vertex) or 'o '
+          const isObj = /(^|\n)v\s+/m.test(text) || /(^|\n)o\s+/m.test(text);
+          if (isObj) {
+            const objLoader = new OBJLoader();
+            const obj = objLoader.parse(text);
+            applyMaterialOverrides(obj, materialOverride);
+            setObject3d(obj);
+            return;
+          }
+
+          // If not OBJ, rethrow original gltf error to be handled by outer code
+          throw gltfErr;
+        } catch (fallbackErr) {
+          console.error("ModelSmart: failed to load", src, gltfErr, fallbackErr);
+        }
+      }
+    }
+
+    loadModel();
+    return () => {
+      mounted = false;
+    };
+  }, [src, materialOverride, dracoPath]);
+
+  const s = scale * GLOBAL_MODEL_SCALE;
+  const r = { ...GLOBAL_ROTATE, ...(autoRotate || {}) };
+  const fine = pivotFineTune ?? GLOBAL_PIVOT_FINE_TUNE;
+
+  if (!object3d) return null;
+
+  return (
+    <group position={position} rotation={rotation}>
+      <Rotator enabled={!!r.enabled} speed={r.speed} axis={r.axis}>
+        <CenterPivot fineTune={fine}>
+          <primitive object={object3d} scale={s} dispose={null} />
+        </CenterPivot>
+      </Rotator>
+    </group>
+  );
 }
 
 /* === FIX: TRANSPARENT CANVAS BACKGROUND === */
