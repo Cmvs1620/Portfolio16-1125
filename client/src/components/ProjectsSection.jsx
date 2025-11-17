@@ -38,9 +38,9 @@ const projects = [
       "Process + feedback loop improvements",
     ],
     tags: ["Graphic Design", "Motion", "CRM", "iGaming", "Branding"],
-    image: "/projects/paf/bill.png",
+    image: "client/public/projects/paf/bill.png",
     gallery: [
-      "/projects/paf/bill.png",
+      "client/public/projects/paf/bill.png",
       "/projects/paf/Intropaf.gif",
       "/projects/paf/phones.png",
       "/projects/paf/icon 2.png",
