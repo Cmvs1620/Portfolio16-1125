@@ -3,7 +3,7 @@ import { OrbitControls } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
 function EarthModel() {
-  const obj = useLoader(OBJLoader, "/assets/models/earth.obj");
+  const obj = useLoader(OBJLoader, "/Models/earth.obj");
   useFrame(() => {
     obj.rotation.y += 0.003; // slow spin
   });

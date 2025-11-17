@@ -6,7 +6,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 // Full-screen, minimal, guaranteed render path.
 // Uses your working URL: /assets/models/earth.obj
 function EarthModel() {
-  const obj = useLoader(OBJLoader, "/assets/models/earth.obj");
+  const obj = useLoader(OBJLoader, "/Models/earth.obj");
   // Slow spin so you *see* it move (and know it's alive)
   useFrame(() => {
     obj.rotation.y += 0.005;
@@ -32,7 +32,7 @@ export default function ThreeTest() {
           color: "white",
         }}
       >
-        Earth OBJ • /assets/models/earth.obj
+        Earth OBJ • /Models/earth.obj
       </div>
 
       <Canvas camera={{ position: [0, 1, 3], fov: 50 }}>
