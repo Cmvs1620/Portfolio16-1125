@@ -184,7 +184,7 @@ function HeroSection() {
                 {/* File must exist at /public/assets/models/Torus3.glb */}
                 <Hero3D
                   model={{
-                    src: "/assets/models/Torus3.glb",
+                    src: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Torus3.glb",
                     scale: 0.9,
                     position: [0, -0.28, 0],
                     rotation: [0, Math.PI * 0.0, 0],
