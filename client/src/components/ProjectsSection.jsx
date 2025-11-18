@@ -168,13 +168,13 @@ This experience taught me to navigate a high-pressure work environment while mai
       "The color palette of our visual identity is inspired by the earthy tones of nature, with shades of green and brown. The typography is simple and modern, conveying our commitment to simplicity and clarity. Our mission is to create sustainable and close to home travel guides.",
     highlights: ["Expense tracking", "Data visualization", "Budget planning"],
     tags: ["React", "Chart.js", "Node.js", "Firebase"],
-    image: "/betula/Sign2.png",
+    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/Sign2.png",
     gallery: [
-      "/betula/graphical.gif",
-      "/betula/cover.png",
-      "/betula/LOGO.png",
-      "/betula/open1.png",
-      "/betula/Sign2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/graphical.gif",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/cover.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/LOGO.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/open1.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Betula/Sign2.png"
     ],
     accentColor: "from-rose-500 to-pink-600",
     demoUrl: "https://spendlix.vercel.app/login"
@@ -212,15 +212,12 @@ This experience taught me to navigate a high-pressure work environment while mai
       "ZURU Tech, a cool and user-friendly IoT system was brought to life. The big idea? To make everyday home tasks a breeze and add a personal touch to the way we use our home gadgets.",
     highlights: ["Job matching", "Candidate tracking", "Application system"],
     tags: ["Next.js", "Figma"],
-    image: "/Zuru/gal.png",
+    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/gal.png",
     gallery: [
-      "/Zuru/p-1.png",
-      "/Zuru/p-2.png",
-      "/Zuru/p-3.png",
-      "/Zuru/p-4.png",
-      "/Zuru/p-12.png",
-      "/Zuru/ipad1.png",
-      "/Zuru/ipad2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/ipad2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/p1.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/ipad1.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/gal.png"
     ],
     accentColor: "from-orange-500 to-red-600",
     demoUrl: "#"
