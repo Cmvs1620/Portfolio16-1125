@@ -18,7 +18,7 @@ function AboutSectionInner() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const reduce = useReducedMotion();
 
-  const AVATAR_SRC = "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/cmvspic.png"; // Supabase-hosted avatar
+  const AVATAR_SRC = "/cmvspic.png"; // PLACEHOLDER (restored per request)
 
   const PROFILE = {
     name: "Carl-Maurits von Schantz",
