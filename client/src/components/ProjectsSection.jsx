@@ -191,12 +191,13 @@ This experience taught me to navigate a high-pressure work environment while mai
     tags: ["React", "Redux", "Mapbox", "Stripe"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/Red1.jpg",
     gallery: [
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/blom.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/fest.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/glas.gif",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/logo.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/Red1.jpg",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/tshirt.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/blom.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/2.png"
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/tshirt.png"
     ],
     accentColor: "from-violet-500 to-purple-600",
     demoUrl: "https://eattoo-food-delivery-website-frontend.onrender.com/"
