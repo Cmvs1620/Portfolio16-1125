@@ -4,13 +4,7 @@
 
 import React, { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import {
-  Float,
-  Environment,
-  PresentationControls,
-  ContactShadows,
-  Html,
-} from "@react-three/drei";
+import { Float, PresentationControls, ContactShadows, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTFLoader, DRACOLoader, OBJLoader, MTLLoader } from "three-stdlib";
 
@@ -215,9 +209,10 @@ export default function Hero3D({ model, environment = "city" }) {
           </Float>
         </PresentationControls>
 
-        {/* If you still want reflections but NOT colored sky,
-            set the background of the environment to 'null' */}
-        <Environment preset={environment} background={false} />
+        {/* Note: removed automatic HDR preset loading (some drei presets fetch assets
+          from external CDNs which can 404). Lighting is provided via scene lights
+          above; add a custom Environment with `files` pointing to your own HDR
+          if you want image-based lighting. */}
 
         <ContactShadows
           position={[0, -1.6, 0]}
