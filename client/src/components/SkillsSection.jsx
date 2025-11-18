@@ -17,40 +17,39 @@ const iconUrl = (filename) => {
 
 /* ===== ICON MAPPING (key → file) ===== */
 const iconImages = {
-  // Design & Direction
-  figma: iconUrl("figma.png"),
-  photoshop: iconUrl("photoshop.png"),
-  illustrator: iconUrl("illustrator.png"),
+  // Design & Direction (Supabase-hosted)
+  figma: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/figma-Ceg9w9Ty.png",
+  photoshop: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/photoshop-M3TTpGno.png",
+  illustrator: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/illustrator-BW-oRGwf.png",
   indesign: iconUrl("indesign.png"),
 
-  // Motion & Video
-  aftereffects: iconUrl("aftereffects.png"),
-  premiere: iconUrl("premiere.png"),
-  blender: iconUrl("blender.png"),
+  // Motion & Video (Supabase-hosted)
+  aftereffects: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/aftereffects-DfG0mybp.png",
+  premiere: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/premiere-BNGkAMZ1.png",
+  blender: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/blender-Y6Vfkk_m.png",
 
-  // Color & Finishing
-  davinci: iconUrl("davinci.png"),
+  // Color & Finishing (Supabase-hosted)
+  davinci: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/davinci-C3VsEGsw.png",
 
   // Marketing & Ads
-  meta: iconUrl("meta.png"),
+  meta: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/meta-DUoD6I3-.png",
   snapads: iconUrl("snapads.png"),
 
+  // AI & Emerging (Supabase-hosted)
+  midjourney: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/midjourney-BvXs8uiz.png",
+  bambulabs: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/bambulabs-ChhxhGRP.png",
+  nanobanana: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/nanobanana-CYZQOXPw.png",
 
-  // AI & Emerging
-  midjourney: iconUrl("midjourney.png"),
-  bambulabs: iconUrl("bambulabs.png"),
-  nanobanana: iconUrl("nanobanana.png"),
-
-  // Interactive / Dev & CMS
-  react: iconUrl("react.png"),
-  sanity: iconUrl("sanity.png"),
-  shopify: iconUrl("shopify.png"),
-  threejs: iconUrl("threejs.png"), // <- this was throwing; URL loader is resilient
+  // Interactive / Dev & CMS (Supabase-hosted where available)
+  react: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/react-CQTsoe6K.png",
+  sanity: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/sanity-Cpaov1SP.png",
+  shopify: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/shopify-D2uEkyA9.png",
+  threejs: iconUrl("threejs.png"),
 
   // Collaboration / Management
-  notion: iconUrl("notion.png"),
+  notion: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/notion-CJshAVrR.png",
   slides: iconUrl("slides.png"),
-  jira: iconUrl("jira.png"),
+  jira: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/jira-D1_59nQ3.png",
   trello: iconUrl("trello.png"),
 };
 
