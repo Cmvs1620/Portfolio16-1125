@@ -40,11 +40,11 @@ const projects = [
     tags: ["Graphic Design", "Motion", "CRM", "iGaming", "Branding"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
     gallery: [
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Intropaf.gif",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/2.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/atp.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/gonz.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Intropaf.gif"
     ],
     accentColor: "from-rose-500 to-red-600",
     demoUrl: "#"
@@ -190,10 +190,10 @@ This experience taught me to navigate a high-pressure work environment while mai
     tags: ["React", "Redux", "Mapbox", "Stripe"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/Red1.jpg",
     gallery: [
+       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/glas.gif",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/2.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/blom.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/fest.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/glas.gif",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/logo.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/Red1.jpg",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/dank/tshirt.png"
@@ -211,12 +211,12 @@ This experience taught me to navigate a high-pressure work environment while mai
       "ZURU Tech, a cool and user-friendly IoT system was brought to life. The big idea? To make everyday home tasks a breeze and add a personal touch to the way we use our home gadgets.",
     highlights: ["Job matching", "Candidate tracking", "Application system"],
     tags: ["Next.js", "Figma"],
-    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/gal.png",
+    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/zuru/Screenshot%202025-12-15%20at%2022.57.24.png",
     gallery: [
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/ipad2.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/p1.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/ipad1.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Untitled%20folder/gal.png"
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/zuru/Screenshot%202025-12-15%20at%2022.57.24.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/zuru/ipad1.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/zuru/ipad2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/zuru/p1.png"
     ],
     accentColor: "from-orange-500 to-red-600",
     demoUrl: "#"

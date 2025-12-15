@@ -152,7 +152,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                     {project.highlights?.length > 0 && (
                       <div className="text-left">
                         <h5 className="text-sm font-medium mb-2">
-                          Highlights / Höjdpunkter
+                          Highlights
                         </h5>
                         <ul className="grid gap-2">
                           {project.highlights.map((h, i) => (
