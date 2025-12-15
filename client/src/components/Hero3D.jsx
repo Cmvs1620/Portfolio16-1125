@@ -1,12 +1,18 @@
 // src/components/Hero3D.jsx
-// Transparent loading fix + true-axis rotation.
-// Everything else (scale, offset, rotation, etc.) unchanged.
+// Refined lighting + optional environment map.
+// Keeps your rotation, pivot, scale logic intact.
 
-import React, { Suspense, useEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Float, PresentationControls, ContactShadows, Html } from "@react-three/drei";
+import React, { Suspense, useEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Float,
+  PresentationControls,
+  ContactShadows,
+  Html,
+  Environment,
+} from "@react-three/drei";
 import * as THREE from "three";
-import { GLTFLoader, DRACOLoader, OBJLoader, MTLLoader } from "three-stdlib";
+import { GLTFLoader, DRACOLoader, OBJLoader } from "three-stdlib";
 
 /* === your previous knobs here === */
 const GLOBAL_MODEL_SCALE = 1.0;
@@ -19,14 +25,19 @@ function applyMaterialOverrides(root, materialOverride) {
     if (child.isMesh) {
       child.castShadow = true;
       child.receiveShadow = true;
+
       if (materialOverride) {
+        // ⚠️ This will override ALL original materials (textures, colors, roughness maps, etc.)
+        // Only use this if you really want a flat, unified look.
         child.material = new THREE.MeshStandardMaterial({
           color: materialOverride.color || "#c084fc",
-          metalness: materialOverride.metalness ?? 0.5,
-          roughness: materialOverride.roughness ?? 0.4,
+          metalness: materialOverride.metalness ?? 0.2,
+          roughness: materialOverride.roughness ?? 0.6,
         });
       } else if (child.material) {
-        child.material.side = THREE.DoubleSide;
+        // More realistic shading: front side only by default
+        child.material.side = THREE.FrontSide;
+        child.material.needsUpdate = true;
       }
     }
   });
@@ -66,16 +77,46 @@ function CenterLoader({ label = "Loading…" }) {
   );
 }
 
-/* --- GLB model (shortened, unchanged logic) --- */
-function ModelGLB({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0], materialOverride, dracoPath = "/draco/", autoRotate, pivotFineTune }) {
-  const gltf = useLoader(GLTFLoader, src, (loader) => {
+/* --- GLB model --- */
+function ModelGLB({
+  src,
+  scale = 1,
+  position = [0, 0, 0],
+  rotation = [0, 0, 0],
+  materialOverride,
+  dracoPath = "/draco/",
+  autoRotate,
+  pivotFineTune,
+}) {
+  const [gltf, setGltf] = useState(null);
+
+  useEffect(() => {
+    const loader = new GLTFLoader();
     const draco = new DRACOLoader();
     draco.setDecoderPath(dracoPath);
     loader.setDRACOLoader(draco);
-  });
-  useEffect(() => {
-    if (gltf?.scene) applyMaterialOverrides(gltf.scene, materialOverride);
-  }, [gltf, materialOverride]);
+
+    let mounted = true;
+
+    loader.load(
+      src,
+      (loaded) => {
+        if (!mounted) return;
+        applyMaterialOverrides(loaded.scene, materialOverride);
+        setGltf(loaded);
+      },
+      undefined,
+      (err) => {
+        console.error("ModelGLB load error:", err);
+      }
+    );
+
+    return () => {
+      mounted = false;
+    };
+  }, [src, materialOverride, dracoPath]);
+
+  if (!gltf?.scene) return null;
 
   const s = scale * GLOBAL_MODEL_SCALE;
   const r = { ...GLOBAL_ROTATE, ...(autoRotate || {}) };
@@ -92,15 +133,17 @@ function ModelGLB({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0], 
   );
 }
 
-/* --- AUTO DETECT --- */
-function ModelAuto(props) {
-  const lower = (props.src || "").toLowerCase();
-  // Prefer a smart loader that tries GLTF first then falls back to OBJ parsing.
-  return <ModelSmart {...props} />;
-}
-
 /* --- Smart loader: try GLTF (including DRACO) then fall back to OBJ text parsing --- */
-function ModelSmart({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0], materialOverride, dracoPath = "/draco/", autoRotate, pivotFineTune }) {
+function ModelSmart({
+  src,
+  scale = 1,
+  position = [0, 0, 0],
+  rotation = [0, 0, 0],
+  materialOverride,
+  dracoPath = "/draco/",
+  autoRotate,
+  pivotFineTune,
+}) {
   const [object3d, setObject3d] = React.useState(null);
 
   React.useEffect(() => {
@@ -125,7 +168,6 @@ function ModelSmart({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0]
           const text = await res.text();
           if (!mounted) return;
 
-          // Heuristic: OBJ files contain lines starting with 'v ' (vertex) or 'o '
           const isObj = /(^|\n)v\s+/m.test(text) || /(^|\n)o\s+/m.test(text);
           if (isObj) {
             const objLoader = new OBJLoader();
@@ -135,7 +177,6 @@ function ModelSmart({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0]
             return;
           }
 
-          // If not OBJ, rethrow original gltf error to be handled by outer code
           throw gltfErr;
         } catch (fallbackErr) {
           console.error("ModelSmart: failed to load", src, gltfErr, fallbackErr);
@@ -166,8 +207,14 @@ function ModelSmart({ src, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0]
   );
 }
 
-/* === FIX: TRANSPARENT CANVAS BACKGROUND === */
-export default function Hero3D({ model, environment = "city" }) {
+/* --- AUTO DETECT --- */
+function ModelAuto(props) {
+  // You can extend this if you ever want different loaders per extension.
+  return <ModelSmart {...props} />;
+}
+
+/* === MAIN HERO 3D === */
+export default function Hero3D({ model, environment = "studio" }) {
   return (
     <div className="relative w-full h-[360px] sm:h-[420px] lg:h-[500px]">
       <Canvas
@@ -175,23 +222,52 @@ export default function Hero3D({ model, environment = "city" }) {
         dpr={[1, 2]}
         gl={{
           antialias: true,
-          alpha: true,            // <— ensures the canvas itself is transparent
+          alpha: true,
           preserveDrawingBuffer: false,
           powerPreference: "high-performance",
         }}
-        camera={{ position: [0, 0, 5], fov: 45, near: 0.1, far: 100 }}
-        style={{ background: "transparent" }} // <— explicit CSS transparent background
+        camera={{ position: [0, 0.1, 5], fov: 45, near: 0.1, far: 100 }}
+        style={{ background: "transparent" }}
         onCreated={({ gl, scene }) => {
           gl.outputColorSpace = THREE.SRGBColorSpace;
           gl.toneMapping = THREE.ACESFilmicToneMapping;
+          gl.toneMappingExposure = 1.0;
+          gl.physicallyCorrectLights = true;
           gl.shadowMap.enabled = true;
-          // Critical line: make the THREE scene background transparent
           scene.background = null;
         }}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[4, 6, 8]} intensity={1.2} castShadow />
-        <spotLight position={[-6, 3, 2]} intensity={0.6} angle={0.4} penumbra={0.6} />
+        {/* Softer, more realistic base lighting */}
+        <ambientLight intensity={0.25} />
+
+        <directionalLight
+          position={[4, 6, 8]}
+          intensity={0.9}
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+        />
+
+        <spotLight
+          position={[-6, 3, 2]}
+          intensity={0.4}
+          angle={0.4}
+          penumbra={0.6}
+          castShadow
+        />
+
+        {/* Optional environment lighting */}
+        {environment !== "none" && (
+          <Environment
+            // If you want to avoid external CDNs, use a custom HDR:
+            // PLACEHOLDER: drop your HDR in /public/assets/hdr/studio.hdr
+            // and switch to:
+            // files="/assets/hdr/studio.hdr"
+            preset={environment === "studio" || environment === "city" ? environment : "studio"}
+            background={false}
+            intensity={1}
+          />
+        )}
 
         <PresentationControls
           global
@@ -209,22 +285,16 @@ export default function Hero3D({ model, environment = "city" }) {
           </Float>
         </PresentationControls>
 
-        {/* Note: removed automatic HDR preset loading (some drei presets fetch assets
-          from external CDNs which can 404). Lighting is provided via scene lights
-          above; add a custom Environment with `files` pointing to your own HDR
-          if you want image-based lighting. */}
-
         <ContactShadows
           position={[0, -1.6, 0]}
-          opacity={0.4}
+          opacity={0.35}
           scale={10}
           blur={2.5}
           far={4}
         />
       </Canvas>
 
-      {/* Remove the pink/orange glow background div if undesired */}
-      {/* Or leave it and tweak opacity/color to your liking */}
+      {/* Background glow – tweak or remove */}
       {/* <div className="pointer-events-none absolute inset-0 -z-10 blur-3xl opacity-60 bg-gradient-to-tr from-primary/30 via-purple-500/20 to-pink-500/30" /> */}
     </div>
   );

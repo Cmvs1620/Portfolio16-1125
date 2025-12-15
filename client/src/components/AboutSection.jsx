@@ -25,17 +25,10 @@ function AboutSectionInner() {
     location: "Stockholm, Sweden · Sverige",
     paragraph: (
       <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed text-left space-y-4">
-       I design with purpose — translating strategy into form through type, rhythm, and motion. Every detail is intentional, every choice rooted in meaning. My work begins with a clear objective: to create design that endures beyond a first impression and communicates with lasting clarity.
-         <br />
-        <br />
-My approach has been shaped by experience across disciplines — from fashion to digital design — and by living in places like Paris, Sweden, and Spain.
-        <br />
-        <br />
-         Each culture and industry has influenced how I think about aesthetics, function, and emotion — how design behaves, not just how it looks.
-For me, design is intent made visible. It guides, informs, and connects in ways words alone cannot.
-        <br />
-        <br />
-        I work where precision meets personality — where systems tell stories, and emotion brings purpose to form.
+       I design with a clear purpose. I turn ideas and strategy into visual form using typography, layout, and motion. Every detail is considered, and every choice is made for a reason. My goal is to create design that lasts and communicates clearly, not just something that looks good at first glance.
+My approach comes from working across different fields, from fashion to digital design, and from living in places like Paris, Sweden, and Spain. These experiences have shaped how I think about design — how it should work, how it should feel, and how people interact with it.
+For me, design is about making intent visible. It helps guide people, share ideas, and create connections that go beyond words.
+I work at the intersection of structure and personality, creating designs that are both thoughtful and expressive.
       </p>
     ),
   };
