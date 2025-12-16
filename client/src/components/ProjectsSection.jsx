@@ -1,3 +1,6 @@
+// src/components/ProjectsSection.jsx
+// NOTE: projects array and all links kept EXACTLY as you provided.
+
 import React, { useRef, useState } from "react";
 import { ArrowRight, ChevronUp, Star, Sparkles, Eye, MapPin } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";

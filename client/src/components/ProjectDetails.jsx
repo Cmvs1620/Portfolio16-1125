@@ -1,3 +1,6 @@
+// src/components/ProjectDetails.jsx
+// Modal with true mobile-first layout, vertical scrolling, and touch-friendly media
+
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
@@ -5,13 +8,15 @@ import { X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 /**
  * ProjectDetailsModal
  * -----------------------------------------------------
- * ✅ All text left-aligned
+ * ✅ Mobile-first: stacked image + text, full-height scroll
+ * ✅ Desktop: split layout (media + copy)
  * ✅ Images cropped to 16:9 ratio
- * ✅ Click media → fullscreen zoom
+ * ✅ Touch-friendly: scrolling doesn't accidentally zoom
+ * ✅ Tap "Tap to zoom / Zooma" → fullscreen lightbox
  * ✅ Swap images with arrows in both normal + zoom mode
  * ✅ Supports JPG / PNG / GIF / MP4 / WEBM
  * ✅ Supports <br> and multi-line text
- * ✅ NEW: shows project.location
+ * ✅ Shows project.location
  */
 
 // Converts HTML <br> tags to newlines so whitespace-pre-line can render breaks.
@@ -23,8 +28,16 @@ const normalizeText = (t) =>
 export default function ProjectDetailsModal({ open, project, onClose }) {
   const [index, setIndex] = useState(0);
   const [zoomSrc, setZoomSrc] = useState(null);
+  const [isTouch, setIsTouch] = useState(false);
 
-  // Prefix correct Vite base path
+  // Detect touch / coarse pointer – used to avoid "tap = zoom" on mobile.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(pointer: coarse)");
+    setIsTouch(mq.matches);
+  }, []);
+
+  // Prefix correct Vite base path (unchanged)
   const withBase = useCallback((p) => {
     if (!p) return p;
     if (/^(https?:)?\/\//.test(p) || /^data:/.test(p)) return p;
@@ -64,27 +77,32 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
   const renderMedia = (src) => {
     const lower = String(src).toLowerCase();
     const isVideo = lower.endsWith(".mp4") || lower.endsWith(".webm");
+
+    const commonProps = {
+      key: src,
+      src,
+      className:
+        "absolute inset-0 w-full h-full object-cover rounded-lg" +
+        (isTouch ? "" : " cursor-zoom-in"),
+      onClick: isTouch ? undefined : () => setZoomSrc(src),
+    };
+
     if (isVideo) {
       return (
         <video
-          key={src}
-          src={src}
+          {...commonProps}
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover rounded-lg cursor-zoom-in"
-          onClick={() => setZoomSrc(src)}
         />
       );
     }
+
     return (
       <img
-        key={src}
-        src={src}
+        {...commonProps}
         alt={project?.title || ""}
-        className="absolute inset-0 w-full h-full object-cover rounded-lg cursor-zoom-in"
-        onClick={() => setZoomSrc(src)}
         loading="lazy"
       />
     );
@@ -96,7 +114,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
         <>
           {/* ---------- Main Modal ---------- */}
           <motion.div
-            className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center"
+            className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm p-0 sm:p-4 flex items-stretch justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -105,18 +123,29 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
             <motion.div
               role="dialog"
               aria-modal="true"
-              className="relative w-full max-w-6xl bg-background border border-border rounded-2xl shadow-2xl overflow-hidden text-left"
-              initial={{ opacity: 0, scale: 0.92, y: 12 }}
+              className="
+                relative
+                w-full max-w-6xl
+                h-full
+                max-h-[100vh] sm:max-h-[90vh]
+                bg-background border border-border
+                rounded-none sm:rounded-2xl
+                shadow-2xl overflow-hidden text-left
+                flex flex-col
+              "
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
-              transition={{ type: "spring", damping: 22, stiffness: 240 }}
+              transition={{ type: 'spring', damping: 22, stiffness: 240 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-start justify-between px-6 py-5 border-b border-border bg-card/60 backdrop-blur">
+              <div className="flex items-start justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-border bg-card/60 backdrop-blur">
                 <div className="min-w-0 text-left">
-                  <h3 className="text-xl md:text-2xl font-bold">{project.title}</h3>
-                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold">
+                    {project.title}
+                  </h3>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs sm:text-sm text-muted-foreground">
                     {project.category && <span>{project.category}</span>}
                     {project.location && (
                       <span className="inline-flex items-center gap-1.5">
@@ -137,123 +166,142 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                 </motion.button>
               </div>
 
-              {/* Body */}
-              <div className="grid md:grid-cols-5 gap-0 md:gap-6">
-                {/* Left-aligned text */}
-                <div className="md:col-span-2 p-6 md:pl-6 md:pr-0 order-2 md:order-1 text-left">
-                  <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-                    <div>
-                      <h4 className="text-lg font-semibold">Overview</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line text-left">
-                        {normalizeText(project.details || project.description)}
-                      </p>
-                    </div>
-
-                    {project.highlights?.length > 0 && (
-                      <div className="text-left">
-                        <h5 className="text-sm font-medium mb-2">
-                          Highlights
-                        </h5>
-                        <ul className="grid gap-2">
-                          {project.highlights.map((h, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-muted-foreground flex gap-2"
-                            >
-                              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
+              {/* Body — full-height scroll on mobile */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="px-4 sm:px-6 py-4 sm:py-6 space-y-6 md:space-y-0 md:grid md:grid-cols-5 md:gap-6">
+                  {/* Media block */}
+                  <div className="md:col-span-3 order-1">
+                    <div className="relative w-full rounded-lg overflow-hidden bg-black max-h-[50vh] md:max-h-none">
+                      <div className="relative aspect-[16/9] w-full">
+                        <AnimatePresence mode="wait">
+                          {renderMedia(media[index])}
+                        </AnimatePresence>
                       </div>
-                    )}
 
-                    {project.tags?.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {project.tags.map((t, i) => (
-                          <span
-                            key={i}
-                            className="px-2.5 py-1 text-xs rounded-md bg-primary/10 text-primary border border-primary/20"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right: Media (16x9) */}
-                <div className="md:col-span-3 order-1 md:order-2">
-                  <div className="relative w-full aspect-[16/9] bg-black overflow-hidden rounded-lg">
-                    <AnimatePresence mode="wait">{renderMedia(media[index])}</AnimatePresence>
-
-                    {/* Swap arrows */}
-                    {media.length > 1 && (
-                      <>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            goPrev();
-                          }}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
-                          aria-label="Previous"
-                        >
-                          <ChevronLeft className="h-5 w-5" />
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            goNext();
-                          }}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
-                          aria-label="Next"
-                        >
-                          <ChevronRight className="h-5 w-5" />
-                        </button>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Thumbnails */}
-                  {media.length > 1 && (
-                    <div className="relative">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-background to-transparent" />
-                      <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent" />
-                      <div
-                        className="p-4 flex gap-2 overflow-x-auto scroll-smooth"
-                        style={{ scrollSnapType: "x mandatory" }}
-                      >
-                        {media.map((src, i) => (
+                      {/* Swap arrows */}
+                      {media.length > 1 && (
+                        <>
                           <button
-                            key={src + i}
-                            onClick={() => setIndex(i)}
-                            className={`border rounded-lg overflow-hidden h-16 w-28 shrink-0 bg-muted scroll-ml-4 ${
-                              i === index
-                                ? "border-primary ring-2 ring-primary/30"
-                                : "border-border"
-                            }`}
-                            style={{ scrollSnapAlign: "start" }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              goPrev();
+                            }}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
+                            aria-label="Previous"
                           >
-                            <img
-                              src={src}
-                              alt={`thumb ${i + 1}`}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
+                            <ChevronLeft className="h-5 w-5" />
                           </button>
-                        ))}
-                      </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              goNext();
+                            }}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
+                            aria-label="Next"
+                          >
+                            <ChevronRight className="h-5 w-5" />
+                          </button>
+                        </>
+                      )}
+
+                      {/* Zoom button – works on touch + desktop */}
+                      {media.length > 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setZoomSrc(media[index]);
+                          }}
+                          className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-black/55 text-xs text-white border border-white/30 backdrop-blur-sm"
+                        >
+                          Tap to zoom / Zooma
+                        </button>
+                      )}
                     </div>
-                  )}
+
+                    {/* Thumbnails */}
+                    {media.length > 1 && (
+                      <div className="relative mt-3 sm:mt-4">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-background to-transparent" />
+                        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent" />
+                        <div
+                          className="p-2 sm:p-3 flex gap-2 overflow-x-auto scroll-smooth"
+                          style={{ scrollSnapType: "x mandatory" }}
+                        >
+                          {media.map((src, i) => (
+                            <button
+                              key={src + i}
+                              onClick={() => setIndex(i)}
+                              className={`border rounded-lg overflow-hidden h-16 w-28 shrink-0 bg-muted scroll-ml-4 ${
+                                i === index
+                                  ? "border-primary ring-2 ring-primary/30"
+                                  : "border-border"
+                              }`}
+                              style={{ scrollSnapAlign: "start" }}
+                            >
+                              <img
+                                src={src}
+                                alt={`thumb ${i + 1}`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                              />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Text block */}
+                  <div className="md:col-span-2 order-2 text-left">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="text-base sm:text-lg font-semibold mb-1">
+                          Overview
+                        </h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                          {normalizeText(project.details || project.description)}
+                        </p>
+                      </div>
+
+                      {project.highlights?.length > 0 && (
+                        <div>
+                          <h5 className="text-sm font-medium mb-2">Highlights</h5>
+                          <ul className="grid gap-2">
+                            {project.highlights.map((h, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-muted-foreground flex gap-2"
+                              >
+                                <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {project.tags?.length > 0 && (
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {project.tags.map((t, i) => (
+                            <span
+                              key={i}
+                              className="px-2.5 py-1 text-xs rounded-md bg-primary/10 text-primary border border-primary/20"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="px-6 py-4 border-t border-border text-sm text-muted-foreground text-left">
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-border text-xs sm:text-sm text-muted-foreground text-left">
                 Press{" "}
-                <kbd className="px-1.5 py-0.5 border border-border rounded">Esc</kbd> to
-                close / Stäng.
+                <kbd className="px-1.5 py-0.5 border border-border rounded">Esc</kbd>{" "}
+                to close / Stäng.
               </div>
             </motion.div>
           </motion.div>
@@ -283,10 +331,11 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
+                        const nextIndex = (index - 1 + media.length) % media.length;
                         goPrev();
-                        setZoomSrc(media[(index - 1 + media.length) % media.length]);
+                        setZoomSrc(media[nextIndex]);
                       }}
-                      className="absolute left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
+                      className="absolute left-6 sm:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
                       aria-label="Previous"
                     >
                       <ChevronLeft className="h-6 w-6" />
@@ -294,10 +343,11 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
+                        const nextIndex = (index + 1) % media.length;
                         goNext();
-                        setZoomSrc(media[(index + 1) % media.length]);
+                        setZoomSrc(media[nextIndex]);
                       }}
-                      className="absolute right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
+                      className="absolute right-6 sm:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
                       aria-label="Next"
                     >
                       <ChevronRight className="h-6 w-6" />
