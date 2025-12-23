@@ -21,7 +21,7 @@ const iconImages = {
   figma: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/figma-Ceg9w9Ty.png",
   photoshop: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/photoshop-M3TTpGno.png",
   illustrator: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/illustrator-BW-oRGwf.png",
-  indesign: iconUrl("indesign.png"),
+  indesign: "https://storage.cloud.google.com/portfoli/Indesignicon.png",
 
   // Motion & Video (Supabase-hosted)
   aftereffects: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/aftereffects-DfG0mybp.png",
@@ -33,7 +33,7 @@ const iconImages = {
 
   // Marketing & Ads
   meta: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/meta-DUoD6I3-.png",
-  snapads: iconUrl("snapads.png"),
+  snapads: "https://storage.cloud.google.com/portfoli/snapchaticon.png",
 
   // AI & Emerging (Supabase-hosted)
   midjourney: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/midjourney-BvXs8uiz.png",
@@ -44,13 +44,11 @@ const iconImages = {
   react: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/react-CQTsoe6K.png",
   sanity: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/sanity-Cpaov1SP.png",
   shopify: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/shopify-D2uEkyA9.png",
-  threejs: iconUrl("threejs.png"),
 
   // Collaboration / Management
   notion: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/notion-CJshAVrR.png",
-  slides: iconUrl("slides.png"),
   jira: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/skillsection/jira-D1_59nQ3.png",
-  trello: iconUrl("trello.png"),
+  trello: "https://storage.cloud.google.com/portfoli/trello.png",
 };
 
 /* ===== SKILLS DATA ===== */
