@@ -62,7 +62,7 @@ export const Navbar = () => {
   const [isAudioReady, setIsAudioReady] = useState(false);
   const audioRef = useRef(null);
 
-  const musicUrl = "/music.mp3";
+  const musicUrl = "https://storage.cloud.google.com/portfoli/music.mp3";
 
   // Ambient audio (plain JS)
   useEffect(() => {
