@@ -490,7 +490,7 @@ function AboutSectionInner() {
                 <h4 className="font-medium text-sm sm:text-base text-foreground">
                   Quick connect
                 </h4>
-                <span className="text-xs text-muted-foreground">· Snabb kontakt</span>
+                <span className="text-xs text-muted-foreground">·</span>
               </div>
 
               <div className="mt-3 flex justify-center gap-3">
