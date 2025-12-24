@@ -21,7 +21,7 @@ function AboutSectionInner() {
   // ====== PLACEHOLDER AVATAR ======
   // TODO(Carl-Maurits): Replace with your own image
   const AVATAR_SRC =
-    "https://storage.cloud.google.com/portfoli/giv/cmvspic.png";
+    "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/cmvspic.png";
 
   // ====== CONTENT ======
   const PROFILE = useMemo(
