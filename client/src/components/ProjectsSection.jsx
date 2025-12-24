@@ -63,16 +63,16 @@ const projects = [
       "At Givenchy, my role involved contributing to the development and realization of our creative vision. This included responsibilities such as sketching, choosing material, and print renderings to meet the brand's exacting standards, as well as preparing presentation boards. This position required meticulous attention to detail and a deep understanding of luxury aesthetics. During this time, I refined my technical skills, developed a keen eye for design, and stayed updated with the latest footwear trends, seamlessly blending them with Givenchy’s timeless elegance. <br> <br> A key project during my tenure was the development of the Sharklock and Voyou footwear lines, from initial concepts to final production. I played a crucial role in mood board creation, color selection, and design detailing, helping to define the collection’s tone. Seeing my designs come to life was immensely satisfying and underscored the importance of precision and quality in luxury fashion. My experience at Givenchy was not only a professional milestone but also a transformative phase that significantly influenced my design perspective and creativity. It enhanced my expertise in high-end footwear, ignited my passion for innovation, and provided invaluable insights that continue to inspire and guide my career in fashion. With that said, here are some of the shoes I've had the pleasure of working on.",
     highlights: ["Product design", "Hands-on development", "Detail-driven craftsmanship", "Collaboration across teams"],
     tags: ["photoshop", "Leather/canvas", "nomad"],
-    image: "https://storage.cloud.google.com/portfoli/giv/amalia.png",
+    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/amalia.png",
     gallery: [
-      "https://storage.cloud.google.com/portfoli/giv/amalia.png",
-      "https://storage.cloud.google.com/portfoli/giv/bunny.png",
-      "https://storage.cloud.google.com/portfoli/giv/cowboy.png",
-      "https://storage.cloud.google.com/portfoli/giv/giv1.png",
-      "https://storage.cloud.google.com/portfoli/giv/jeans.png",
-      "https://storage.cloud.google.com/portfoli/giv/giv2.jpg",
-      "https://storage.cloud.google.com/portfoli/giv/giv3.jpg",
-      "https://storage.cloud.google.com/portfoli/giv/shark.png"
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/amalia.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/bunny.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/cowboy.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/giv1.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/jeans.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/giv2.jpg",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/giv3.jpg",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/shark.png"
     ],
     accentColor: "from-emerald-500 to-teal-600",
     demoUrl: "https://nauracare.vercel.app"
