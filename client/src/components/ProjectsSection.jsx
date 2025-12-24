@@ -43,11 +43,11 @@ const projects = [
     tags: ["Graphic Design", "Motion", "CRM", "iGaming", "Branding"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
     gallery: [
-      "https://storage.cloud.google.com/portfoli/Paf%20portfolio/Intropaf.gif",
-      "https://storage.cloud.google.com/portfoli/Paf%20portfolio/2.png",
-      "https://storage.googleapis.com/portfoli/Paf%20portfolio/atp.png",
-      "https://storage.cloud.google.com/portfoli/Paf%20portfolio/bill.png",
-      "https://storage.cloud.google.com/portfoli/Paf%20portfolio/gonz.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Intropaf.gif",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/atp.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/gonz.png",
     ],
     accentColor: "from-rose-500 to-red-600",
     demoUrl: "#"
