@@ -16,8 +16,14 @@ import { motion } from "framer-motion";
 import Hero3D from "./Hero3D";
 
 /* ──────────────────────────────────────────────────────────
+   ✅ ONLY CHANGE THIS to swap your 3D object
+   Put your Google/Firebase/Storage "direct .glb file link" here.
+────────────────────────────────────────────────────────── */
+const HERO_MODEL_URL =
+  "https://storage.cloud.google.com/portfoli/torus3.glb";
+
+/* ──────────────────────────────────────────────────────────
    TYPOGRAPHY KNOBS — tweak here only
-   TODO(Carl-Maurits): Tune to taste
 ────────────────────────────────────────────────────────── */
 // Smaller value = tighter gap between the two lines
 const TITLE_LINE_GAP = "clamp(0.12rem, 0.8vw, 0.5rem)";
@@ -117,14 +123,12 @@ function HeroSection() {
                   tracking-[0.03em]
                   uppercase
                 "
-                // Use style instead of Tailwind leading class so you can tune from the knob.
                 style={{ lineHeight: TITLE_LINE_HEIGHT }}
                 variants={itemVariants}
               >
                 {/* Line 1 */}
                 <span
                   className="block text-foreground"
-                  // Gap below the first line; edit TITLE_LINE_GAP above.
                   style={{ marginBottom: TITLE_LINE_GAP }}
                 >
                   Carl-Maurits
@@ -201,10 +205,9 @@ function HeroSection() {
               variants={itemVariants}
             >
               <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl">
-                {/* File must exist at /public/assets/models/Torus3.glb */}
                 <Hero3D
                   model={{
-                    src: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Torus3.glb",
+                    src: HERO_MODEL_URL, // ✅ swap object by changing this const above
                     scale: 0.9,
                     position: [0, -0.28, 0],
                     rotation: [0, Math.PI * 0.0, 0],
