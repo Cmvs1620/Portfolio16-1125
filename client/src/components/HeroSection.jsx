@@ -20,7 +20,7 @@ import Hero3D from "./Hero3D";
    Put your Google/Firebase/Storage "direct .glb file link" here.
 ────────────────────────────────────────────────────────── */
 const HERO_MODEL_URL =
-  "https://storage.cloud.google.com/portfoli/torus3.glb";
+  "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/torus3.glb";
 
 /* ──────────────────────────────────────────────────────────
    TYPOGRAPHY KNOBS — tweak here only
