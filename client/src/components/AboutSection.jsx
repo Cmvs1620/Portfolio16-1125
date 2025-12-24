@@ -45,14 +45,6 @@ function AboutSectionInner() {
             Spain. These experiences have shaped how I think about design — how
             it should work, how it should feel, and how people interact with it.
           </p>
-          <p>
-            For me, design is about making intent visible. It helps guide
-            people, share ideas, and create connections that go beyond words.
-          </p>
-          <p>
-            I work at the intersection of structure and personality, creating
-            designs that are both thoughtful and expressive.
-          </p>
         </div>
       ),
     }),
