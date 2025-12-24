@@ -13,15 +13,29 @@ export const Home = () => {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <StarBackground />
       <Navbar />
+
       <main>
         <HeroSection />
-        {/* Removed the extra 3D section to avoid duplicate mounts */}
+
         <AboutSection />
-        <SkillsSection />
+
+        {/* DESKTOP: Skills here (original position) */}
+        <div className="hidden lg:block">
+          <SkillsSection />
+        </div>
+
         <ProjectsSection />
+
+        {/* MOBILE: Skills moved under Projects */}
+        <div className="block lg:hidden">
+          <SkillsSection />
+        </div>
+
         <TestimonialSection />
+
         <ContactSection />
       </main>
+
       <Footer />
     </div>
   );
