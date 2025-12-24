@@ -555,7 +555,7 @@ function AboutSectionInner() {
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40
                 "
               >
-                Go to contact · Gå till kontakt
+                Go to contact
               </button>
             </div>
           </motion.div>
