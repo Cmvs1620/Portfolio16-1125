@@ -25,6 +25,14 @@ const normalizeText = (t) =>
     .replace(/\r\n/g, "\n")
     .replace(/<br\s*\/?>/gi, "\n");
 
+const cleanUrl = (src) => String(src || "").split("?")[0].toLowerCase();
+const isVideoSrc = (src) => {
+  const lower = cleanUrl(src);
+  return lower.endsWith(".mp4") || lower.endsWith(".webm");
+};
+
+const videoMime = (src) => (cleanUrl(src).endsWith(".webm") ? "video/webm" : "video/mp4");
+
 export default function ProjectDetailsModal({ open, project, onClose }) {
   const [index, setIndex] = useState(0);
   const [zoomSrc, setZoomSrc] = useState(null);
@@ -75,35 +83,114 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
   const goNext = () => setIndex((i) => (i + 1) % media.length);
 
   const renderMedia = (src) => {
-    const lower = String(src).toLowerCase();
-    const isVideo = lower.endsWith(".mp4") || lower.endsWith(".webm");
+    const isVideo = isVideoSrc(src);
 
-    const commonProps = {
-      key: src,
-      src,
-      className:
-        "absolute inset-0 w-full h-full object-cover rounded-lg" +
-        (isTouch ? "" : " cursor-zoom-in"),
-      onClick: isTouch ? undefined : () => setZoomSrc(src),
-    };
+    const commonClass =
+      "absolute inset-0 w-full h-full object-cover rounded-lg" + (isTouch ? "" : " cursor-zoom-in");
 
     if (isVideo) {
       return (
         <video
-          {...commonProps}
+          key={src}
+          className={commonClass}
+          onClick={isTouch ? undefined : () => setZoomSrc(src)}
           autoPlay
           loop
           muted
           playsInline
-        />
+          preload="metadata"
+          // Helpful for cross-origin storage/CDNs (won’t break if same-origin)
+          crossOrigin="anonymous"
+        >
+          <source src={src} type={videoMime(src)} />
+        </video>
       );
     }
 
     return (
       <img
-        {...commonProps}
+        key={src}
+        src={src}
+        className={commonClass}
+        onClick={isTouch ? undefined : () => setZoomSrc(src)}
         alt={project?.title || ""}
         loading="lazy"
+      />
+    );
+  };
+
+  const renderThumb = (src, i) => {
+    const isVideo = isVideoSrc(src);
+
+    // Keep your exact thumbnail button layout/classes, just swap the inner renderer.
+    if (isVideo) {
+      return (
+        <div className="relative w-full h-full">
+          <video
+            className="w-full h-full object-cover"
+            muted
+            playsInline
+            preload="metadata"
+            crossOrigin="anonymous"
+          >
+            <source src={src} type={videoMime(src)} />
+          </video>
+
+          {/* Tiny badge so you can tell it's a video */}
+          <div className="absolute left-1.5 top-1.5 px-2 py-0.5 rounded-md bg-black/55 text-[10px] text-white border border-white/20 backdrop-blur-sm">
+            MP4
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <img
+        src={src}
+        alt={`thumb ${i + 1}`}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    );
+  };
+
+  const renderZoomed = (src) => {
+    const isVideo = isVideoSrc(src);
+
+    if (isVideo) {
+      return (
+        <motion.video
+          key={src}
+          className="max-h-[90vh] max-w-[90vw] object-contain cursor-zoom-out"
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 160, damping: 20 }}
+          controls
+          playsInline
+          autoPlay
+          loop
+          muted
+          preload="metadata"
+          crossOrigin="anonymous"
+          onClick={() => setZoomSrc(null)}
+        >
+          <source src={src} type={videoMime(src)} />
+        </motion.video>
+      );
+    }
+
+    return (
+      <motion.img
+        key={src}
+        src={src}
+        alt="Zoomed media"
+        className="max-h-[90vh] max-w-[90vw] object-contain cursor-zoom-out"
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 160, damping: 20 }}
+        onClick={() => setZoomSrc(null)}
       />
     );
   };
@@ -136,7 +223,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
               initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
-              transition={{ type: 'spring', damping: 22, stiffness: 240 }}
+              transition={{ type: "spring", damping: 22, stiffness: 240 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -238,12 +325,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                               }`}
                               style={{ scrollSnapAlign: "start" }}
                             >
-                              <img
-                                src={src}
-                                alt={`thumb ${i + 1}`}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                              />
+                              {renderThumb(src, i)}
                             </button>
                           ))}
                         </div>
@@ -316,16 +398,8 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                 exit={{ opacity: 0 }}
                 onClick={() => setZoomSrc(null)}
               >
-                <motion.img
-                  key={zoomSrc}
-                  src={zoomSrc}
-                  alt="Zoomed media"
-                  className="max-h-[90vh] max-w-[90vw] object-contain cursor-zoom-out"
-                  initial={{ scale: 0.95, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.95, opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 160, damping: 20 }}
-                />
+                {renderZoomed(zoomSrc)}
+
                 {media.length > 1 && (
                   <>
                     <button

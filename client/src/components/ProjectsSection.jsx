@@ -58,7 +58,7 @@ const projects = [
     title: "Givenchy",
     category: "FASHION · LUXURY",
     location: "Paris, France", // TODO(Carl-Maurits): adjust
-    description: "Shaping high-end footwear collections with a focus on detail, quality, and timeless elegance.",
+    description: "Shaping high-end footwear collections with a focus on detail, quality, and bold design.",
     details:
       "At Givenchy, my role involved contributing to the development and realization of our creative vision. This included responsibilities such as sketching, choosing material, and print renderings to meet the brand's exacting standards, as well as preparing presentation boards. This position required meticulous attention to detail and a deep understanding of luxury aesthetics. During this time, I refined my technical skills, developed a keen eye for design, and stayed updated with the latest footwear trends, seamlessly blending them with Givenchy’s timeless elegance. <br> <br> A key project during my tenure was the development of the Sharklock and Voyou footwear lines, from initial concepts to final production. I played a crucial role in mood board creation, color selection, and design detailing, helping to define the collection’s tone. Seeing my designs come to life was immensely satisfying and underscored the importance of precision and quality in luxury fashion. My experience at Givenchy was not only a professional milestone but also a transformative phase that significantly influenced my design perspective and creativity. It enhanced my expertise in high-end footwear, ignited my passion for innovation, and provided invaluable insights that continue to inspire and guide my career in fashion. With that said, here are some of the shoes I've had the pleasure of working on.",
     highlights: ["Product design", "Hands-on development", "Detail-driven craftsmanship", "Collaboration across teams"],
@@ -76,6 +76,29 @@ const projects = [
     ],
     accentColor: "from-emerald-500 to-teal-600",
     demoUrl: "https://nauracare.vercel.app"
+  },
+  {
+    id: 6,
+    title: "1X2",
+    category: "Gaming",
+    location: "Åland", // TODO(Carl-Maurits): add
+    description: "Creating a national brand in the real money gambling industry.",
+    details:
+      "I led the creation of the complete brand and visual identity for 1x2, Paf’s sports-betting–focused brand. My responsibility covered the full brand lifecycle — from early positioning and conceptual direction to a fully implemented visual system across web, app, and marketing channels. <br> <br> The brand is built around the classic sports betting notation (1–X–2), intentionally leaning into clarity, heritage, and trust. Instead of casino-style hype, 1x2 is designed to feel confident, rational, and focused — targeting bettors who value odds, information, and match-day flow over entertainment-led visuals. <br> ",
+    highlights: ["Lead Designer", "Multy platform coherench", "Application system"],
+    tags: ["Next.js", "Figma"],
+    image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover.png",
+    gallery: [
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/Main.mp4",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/app.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/ATP.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/LAPTOP%20WEBSITE2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/NHL.png"
+    ],
+    accentColor: "from-orange-500 to-red-600",
+    demoUrl: "#"
   },
   {
     id: 1,
