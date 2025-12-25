@@ -33,7 +33,7 @@ const projects = [
     description:
       "Graphic designer & digital content creator for Paf (Swedish market) under a multibrand strategy.",
     details:
-      "PAF\nDesigner\n\nAt Paf, I work as a graphic designer and digital content creator, supporting the Swedish market with tailored marketing assets and brand materials. I collaborate closely with the CRM and Digital Marketing teams under a multibrand strategy, delivering visuals and assets for multiple iGaming brands simultaneously.\n\nMy responsibilities include researching the company’s positioning, competitors, and market trends to ensure that all materials align with both brand values and market expectations. One of my key projects was developing the full brand profile for 1x2, which included establishing its visual identity and producing a complete set of assets that resonate with the market.\n\nBeyond brand development, I produce high-quality graphics, motion assets, and localized content — all adapted for different audiences and campaign types. My role also involves balancing creativity with efficiency, managing tight deadlines, and coordinating with multiple stakeholders.\n\nI’ve put in place processes to improve communication, streamline feedback loops, and ensure smoother collaboration — with the goal of creating visuals that are consistent, effective, and deeply informed by market research.",
+      "PAF\nDesigner\n\nAt Paf, At Paf, I work as a graphic designer and digital content creator for the Swedish market, collaborating closely with CRM and Digital Marketing teams under a multibrand strategy. I design and produce brand assets, motion graphics, and localized campaign content, translating market insights and brand direction into consistent, high-quality visuals while balancing creativity, efficiency, and tight deadlines.",
     highlights: [
       "Multibrand CRM & campaign assets",
       "1x2 full brand profile & identity",
@@ -44,10 +44,12 @@ const projects = [
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
     gallery: [
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Intropaf.gif",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/2.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/atp.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/3d%20copy.gif",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/website2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Apps.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/gonz.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/2.png",
     ],
     accentColor: "from-rose-500 to-red-600",
     demoUrl: "#"
@@ -86,7 +88,7 @@ const projects = [
     details:
       "I led the creation of the complete brand and visual identity for 1x2, Paf’s sports-betting–focused brand. My responsibility covered the full brand lifecycle — from early positioning and conceptual direction to a fully implemented visual system across web, app, and marketing channels. <br> <br> The brand is built around the classic sports betting notation (1–X–2), intentionally leaning into clarity, heritage, and trust. Instead of casino-style hype, 1x2 is designed to feel confident, rational, and focused — targeting bettors who value odds, information, and match-day flow over entertainment-led visuals. <br> ",
     highlights: ["Lead Designer", "Multy platform coherench", "Application system"],
-    tags: ["Next.js", "Figma"],
+    tags: ["Figma", "Photoshop","Illustrator"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover.png",
     gallery: [
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover.png",
