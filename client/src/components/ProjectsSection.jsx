@@ -47,7 +47,6 @@ const projects = [
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/3d%20copy.gif",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/website2.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/Apps.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/bill.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/gonz.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/paf/2.png",
     ],
