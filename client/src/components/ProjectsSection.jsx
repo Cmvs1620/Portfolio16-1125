@@ -36,7 +36,6 @@ const projects = [
       "PAF\nDesigner\n\nAt Paf, At Paf, I work as a graphic designer and digital content creator for the Swedish market, collaborating closely with CRM and Digital Marketing teams under a multibrand strategy. I design and produce brand assets, motion graphics, and localized campaign content, translating market insights and brand direction into consistent, high-quality visuals while balancing creativity, efficiency, and tight deadlines.",
     highlights: [
       "Multibrand CRM & campaign assets",
-      "1x2 full brand profile & identity",
       "Localized design & motion graphics",
       "Process + feedback loop improvements",
     ],
