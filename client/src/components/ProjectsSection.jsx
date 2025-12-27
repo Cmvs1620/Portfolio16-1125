@@ -28,11 +28,11 @@ const projects = [
   {
     id: 8,
     title: "Paf",
-    category: "Design · iGaming",
+    category: "Design · Gaming",
     location: "Stockholm, Sweden", // TODO(Carl-Maurits): adjust
     description:
       "Graphic designer & digital content creator for Paf (Swedish market) under a multibrand strategy.",
-    details:
+    details: 
       "PAF\nDesigner\n\nAt Paf, At Paf, I work as a graphic designer and digital content creator for the Swedish market, collaborating closely with CRM and Digital Marketing teams under a multibrand strategy. I design and produce brand assets, motion graphics, and localized campaign content, translating market insights and brand direction into consistent, high-quality visuals while balancing creativity, efficiency, and tight deadlines.",
     highlights: [
       "Multibrand CRM & campaign assets",
@@ -57,7 +57,7 @@ const projects = [
   {
     id: 7,
     title: "Givenchy",
-    category: "FASHION · LUXURY",
+    category: "Fashion · Luxury",
     location: "Paris, France", // TODO(Carl-Maurits): adjust
     description: "Shaping high-end footwear collections with a focus on detail, quality, and bold design.",
     details:
@@ -94,7 +94,7 @@ const projects = [
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/Main.mp4",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/app.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/ATP.png",
-      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover2.png",
+      "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/cover3%20(1).png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/LAPTOP%20WEBSITE2.png",
       "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/1x2/NHL.png"
     ],
@@ -104,7 +104,7 @@ const projects = [
   {
     id: 1,
     title: "Yono Sabo",
-    category: "restaurant",
+    category: "Restaurant",
     location: "Stockholm, Sweden", // TODO(Carl-Maurits): adjust
     description: "Clean geometry and subtle playfulness capture the energy of YONO SABO’s fusion concept.",
     details:
