@@ -31,19 +31,16 @@ function AboutSectionInner() {
       paragraph: (
         <div className="mt-6 sm:mt-8 space-y-4 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed text-left">
           <p>
-            I design with a clear purpose. I turn ideas and strategy into visual
-            form using typography, layout, and motion. Every detail is
-            considered, and every choice is made for a reason.
-          </p>
-          <p>
-            My goal is to create design that lasts and communicates clearly —
-            not just something that looks good at first glance.
-          </p>
-          <p>
-            My approach comes from working across different fields, from fashion
-            to digital design, and from living in places like Paris, Sweden, and
-            Spain. These experiences have shaped how I think about design — how
-            it should work, how it should feel, and how people interact with it.
+            I design with intent, translating ideas and strategy into clear
+            visual systems through typography, layout, and motion. Every
+            decision is deliberate, focused on clarity, function, and longevity
+            rather than surface appeal.
+            <br />
+            <br />
+            My approach is shaped by working across disciplines—from fashion to
+            digital design—and by living in Paris, Sweden, and Spain. These
+            experiences inform how I think about design: how it communicates,
+            how it feels, and how people engage with it over time.
           </p>
         </div>
       ),
@@ -81,16 +78,6 @@ function AboutSectionInner() {
           "Translate design into measurable outcomes — crafting visuals that increase engagement, clarity, and conversion.",
         icon: <Briefcase className="h-4 w-4 text-primary" />,
       },
-    ],
-    []
-  );
-
-  const IMPACT = useMemo(
-    () => [
-      "Distilled complex products into clear visual narratives.",
-      "Defined typographic and motion systems for consistency & feel.",
-      "Bridged creative and production for faster, higher-quality delivery.",
-      "Elevated brand presence across web, social, and product surfaces.",
     ],
     []
   );
@@ -460,29 +447,6 @@ function AboutSectionInner() {
                 </div>
               ))}
             </div>
-
-            {/* Impact */}
-            <div className="mt-8 flex items-center justify-between gap-4">
-              <h3 className="text-lg sm:text-2xl font-medium flex items-center gap-2 sm:gap-3 text-left text-foreground">
-                <Target className="h-4 sm:h-6 w-4 sm:w-6 text-primary" />
-                Impact
-              </h3>
-              <span className="hidden sm:inline text-xs text-muted-foreground">
-                Results · Resultat
-              </span>
-            </div>
-
-            <ul className="mt-4 sm:mt-6 space-y-2 text-left">
-              {IMPACT.map((line, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-sm sm:text-base text-muted-foreground"
-                >
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary/70" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
 
             {/* Socials */}
             <div className="mt-8 rounded-2xl border border-border bg-background/45 p-4 text-center">
