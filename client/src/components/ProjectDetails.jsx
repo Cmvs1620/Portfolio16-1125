@@ -17,6 +17,7 @@ import { X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
  * ✅ Supports JPG / PNG / GIF / MP4 / WEBM
  * ✅ Supports <br> and multi-line text
  * ✅ Shows project.location
+ * ✅ NEW: Video thumbnails via poster=""
  */
 
 // Converts HTML <br> tags to newlines so whitespace-pre-line can render breaks.
@@ -33,9 +34,43 @@ const isVideoSrc = (src) => {
 
 const videoMime = (src) => (cleanUrl(src).endsWith(".webm") ? "video/webm" : "video/mp4");
 
+// Auto-guess a poster image for a video URL without changing your links.
+// Example: ".../Main.mp4" -> ".../Main.jpg" (fallback: .png)
+const guessPoster = (src) => {
+  const original = String(src || "");
+  const noQuery = original.split("?")[0];
+  const query = original.includes("?") ? "?" + original.split("?").slice(1).join("?") : "";
+
+  // If not a video, no poster needed.
+  if (!isVideoSrc(noQuery)) return null;
+
+  if (noQuery.toLowerCase().endsWith(".mp4")) {
+    return noQuery.slice(0, -4) + ".jpg" + query;
+  }
+  if (noQuery.toLowerCase().endsWith(".webm")) {
+    return noQuery.slice(0, -5) + ".jpg" + query;
+  }
+  return null;
+};
+
+// Allow gallery items to be either:
+// - string URL (your current setup)
+// - object: { src, poster } (optional upgrade later)
+const toMediaItem = (item) => {
+  if (!item) return null;
+  if (typeof item === "string") return { src: item, poster: guessPoster(item) };
+  if (typeof item === "object" && item.src) {
+    return {
+      src: item.src,
+      poster: item.poster || guessPoster(item.src),
+    };
+  }
+  return null;
+};
+
 export default function ProjectDetailsModal({ open, project, onClose }) {
   const [index, setIndex] = useState(0);
-  const [zoomSrc, setZoomSrc] = useState(null);
+  const [zoomItem, setZoomItem] = useState(null); // {src, poster}
   const [isTouch, setIsTouch] = useState(false);
 
   // Detect touch / coarse pointer – used to avoid "tap = zoom" on mobile.
@@ -60,8 +95,23 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
       Array.isArray(project.gallery) && project.gallery.length > 0
         ? project.gallery.flat()
         : [project.image];
-    return list.filter(Boolean).map(withBase);
+
+    return list
+      .filter(Boolean)
+      .map((x) => {
+        // ensure base path for both src and poster
+        const item = toMediaItem(x);
+        if (!item) return null;
+
+        const src = withBase(item.src);
+        const poster = item.poster ? withBase(item.poster) : null;
+
+        return { src, poster };
+      })
+      .filter(Boolean);
   }, [project, withBase]);
+
+  const active = media[index] || null;
 
   useEffect(() => setIndex(0), [project?.id]);
 
@@ -70,19 +120,21 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
     if (!open) return;
     const onKey = (e) => {
       if (e.key === "Escape") {
-        zoomSrc ? setZoomSrc(null) : onClose();
+        zoomItem ? setZoomItem(null) : onClose();
       }
       if (e.key === "ArrowRight") setIndex((i) => (i + 1) % media.length);
       if (e.key === "ArrowLeft") setIndex((i) => (i - 1 + media.length) % media.length);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose, media.length, zoomSrc]);
+  }, [open, onClose, media.length, zoomItem]);
 
   const goPrev = () => setIndex((i) => (i - 1 + media.length) % media.length);
   const goNext = () => setIndex((i) => (i + 1) % media.length);
 
-  const renderMedia = (src) => {
+  const renderMedia = (item) => {
+    if (!item) return null;
+    const { src, poster } = item;
     const isVideo = isVideoSrc(src);
 
     const commonClass =
@@ -93,14 +145,14 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
         <video
           key={src}
           className={commonClass}
-          onClick={isTouch ? undefined : () => setZoomSrc(src)}
+          onClick={isTouch ? undefined : () => setZoomItem(item)}
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
-          // Helpful for cross-origin storage/CDNs (won’t break if same-origin)
           crossOrigin="anonymous"
+          poster={poster || undefined}
         >
           <source src={src} type={videoMime(src)} />
         </video>
@@ -112,31 +164,49 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
         key={src}
         src={src}
         className={commonClass}
-        onClick={isTouch ? undefined : () => setZoomSrc(src)}
+        onClick={isTouch ? undefined : () => setZoomItem(item)}
         alt={project?.title || ""}
         loading="lazy"
       />
     );
   };
 
-  const renderThumb = (src, i) => {
+  const renderThumb = (item, i) => {
+    const { src, poster } = item;
     const isVideo = isVideoSrc(src);
 
-    // Keep your exact thumbnail button layout/classes, just swap the inner renderer.
+    // For video thumbs: show the poster image if we have one.
+    // If the guessed poster doesn't exist on your CDN, you'll see a broken image.
+    // To avoid that, we fallback to a simple MP4 badge if the poster fails to load.
     if (isVideo) {
       return (
-        <div className="relative w-full h-full">
-          <video
-            className="w-full h-full object-cover"
-            muted
-            playsInline
-            preload="metadata"
-            crossOrigin="anonymous"
-          >
-            <source src={src} type={videoMime(src)} />
-          </video>
+        <div className="relative w-full h-full bg-black/30">
+          {poster ? (
+            <img
+              src={poster}
+              alt={`thumb ${i + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              onError={(e) => {
+                // If guessed poster doesn't exist, replace with badge UI
+                e.currentTarget.style.display = "none";
+                const parent = e.currentTarget.parentElement;
+                if (parent && !parent.querySelector("[data-fallback='true']")) {
+                  const div = document.createElement("div");
+                  div.setAttribute("data-fallback", "true");
+                  div.className =
+                    "absolute inset-0 flex items-center justify-center text-[10px] text-white border border-white/20 bg-black/50 backdrop-blur-sm";
+                  div.innerText = "MP4";
+                  parent.appendChild(div);
+                }
+              }}
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-[10px] text-white border border-white/20 bg-black/50 backdrop-blur-sm">
+              MP4
+            </div>
+          )}
 
-          {/* Tiny badge so you can tell it's a video */}
           <div className="absolute left-1.5 top-1.5 px-2 py-0.5 rounded-md bg-black/55 text-[10px] text-white border border-white/20 backdrop-blur-sm">
             MP4
           </div>
@@ -154,7 +224,9 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
     );
   };
 
-  const renderZoomed = (src) => {
+  const renderZoomed = (item) => {
+    if (!item) return null;
+    const { src, poster } = item;
     const isVideo = isVideoSrc(src);
 
     if (isVideo) {
@@ -173,7 +245,8 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
           muted
           preload="metadata"
           crossOrigin="anonymous"
-          onClick={() => setZoomSrc(null)}
+          poster={poster || undefined}
+          onClick={() => setZoomItem(null)}
         >
           <source src={src} type={videoMime(src)} />
         </motion.video>
@@ -190,7 +263,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ type: "spring", stiffness: 160, damping: 20 }}
-        onClick={() => setZoomSrc(null)}
+        onClick={() => setZoomItem(null)}
       />
     );
   };
@@ -261,7 +334,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                     <div className="relative w-full rounded-lg overflow-hidden bg-black max-h-[50vh] md:max-h-none">
                       <div className="relative aspect-[16/9] w-full">
                         <AnimatePresence mode="wait">
-                          {renderMedia(media[index])}
+                          {renderMedia(active)}
                         </AnimatePresence>
                       </div>
 
@@ -296,7 +369,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            setZoomSrc(media[index]);
+                            setZoomItem(active);
                           }}
                           className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-black/55 text-xs text-white border border-white/30 backdrop-blur-sm"
                         >
@@ -314,9 +387,9 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                           className="p-2 sm:p-3 flex gap-2 overflow-x-auto scroll-smooth"
                           style={{ scrollSnapType: "x mandatory" }}
                         >
-                          {media.map((src, i) => (
+                          {media.map((item, i) => (
                             <button
-                              key={src + i}
+                              key={item.src + i}
                               onClick={() => setIndex(i)}
                               className={`border rounded-lg overflow-hidden h-16 w-28 shrink-0 bg-muted scroll-ml-4 ${
                                 i === index
@@ -325,7 +398,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                               }`}
                               style={{ scrollSnapAlign: "start" }}
                             >
-                              {renderThumb(src, i)}
+                              {renderThumb(item, i)}
                             </button>
                           ))}
                         </div>
@@ -390,15 +463,15 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
 
           {/* ---------- Fullscreen Zoom Lightbox (with arrows) ---------- */}
           <AnimatePresence>
-            {zoomSrc && (
+            {zoomItem && (
               <motion.div
                 className="fixed inset-0 z-[90] bg-black/95 flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setZoomSrc(null)}
+                onClick={() => setZoomItem(null)}
               >
-                {renderZoomed(zoomSrc)}
+                {renderZoomed(zoomItem)}
 
                 {media.length > 1 && (
                   <>
@@ -407,7 +480,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                         e.stopPropagation();
                         const nextIndex = (index - 1 + media.length) % media.length;
                         goPrev();
-                        setZoomSrc(media[nextIndex]);
+                        setZoomItem(media[nextIndex]);
                       }}
                       className="absolute left-6 sm:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
                       aria-label="Previous"
@@ -419,7 +492,7 @@ export default function ProjectDetailsModal({ open, project, onClose }) {
                         e.stopPropagation();
                         const nextIndex = (index + 1) % media.length;
                         goNext();
-                        setZoomSrc(media[nextIndex]);
+                        setZoomItem(media[nextIndex]);
                       }}
                       className="absolute right-6 sm:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur"
                       aria-label="Next"

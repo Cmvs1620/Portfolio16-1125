@@ -33,7 +33,7 @@ const projects = [
     description:
       "Graphic designer & digital content creator for Paf (Swedish market) under a multibrand strategy.",
     details: 
-      "PAF\nDesigner\n\nAt Paf, At Paf, I work as a graphic designer and digital content creator for the Swedish market, collaborating closely with CRM and Digital Marketing teams under a multibrand strategy. I design and produce brand assets, motion graphics, and localized campaign content, translating market insights and brand direction into consistent, high-quality visuals while balancing creativity, efficiency, and tight deadlines.",
+      "PAF\nDesigner\n\n At Paf, I work as a graphic designer and digital content creator for the Swedish market, collaborating closely with CRM and Digital Marketing teams under a multibrand strategy. I design and produce brand assets, motion graphics, and localized campaign content, translating market insights and brand direction into consistent, high-quality visuals while balancing creativity, efficiency, and tight deadlines.",
     highlights: [
       "Multibrand CRM & campaign assets",
       "Localized design & motion graphics",
@@ -61,7 +61,7 @@ const projects = [
     location: "Paris, France", // TODO(Carl-Maurits): adjust
     description: "Shaping high-end footwear collections with a focus on detail, quality, and bold design.",
     details:
-      "At Givenchy, my role involved contributing to the development and realization of our creative vision. This included responsibilities such as sketching, choosing material, and print renderings to meet the brand's exacting standards, as well as preparing presentation boards. This position required meticulous attention to detail and a deep understanding of luxury aesthetics. During this time, I refined my technical skills, developed a keen eye for design, and stayed updated with the latest footwear trends, seamlessly blending them with Givenchy’s timeless elegance. <br> <br> A key project during my tenure was the development of the Sharklock and Voyou footwear lines, from initial concepts to final production. I played a crucial role in mood board creation, color selection, and design detailing, helping to define the collection’s tone. Seeing my designs come to life was immensely satisfying and underscored the importance of precision and quality in luxury fashion. My experience at Givenchy was not only a professional milestone but also a transformative phase that significantly influenced my design perspective and creativity. It enhanced my expertise in high-end footwear, ignited my passion for innovation, and provided invaluable insights that continue to inspire and guide my career in fashion. With that said, here are some of the shoes I've had the pleasure of working on.",
+      "GIVENCHY\nDesigner\n\nAt Givenchy, I contributed to the brand’s creative vision through footwear design—sketching, material selection, print renderings, and presentation boards—working to the highest luxury standards. I was deeply involved in the development of the Sharklock and Voyou lines, from concept to production, shaping mood, color, and detailing. This experience refined my technical precision, design sensibility, and understanding of contemporary luxury footwear.",
     highlights: ["Product design", "Hands-on development", "Detail-driven craftsmanship", "Collaboration across teams"],
     tags: ["photoshop", "Leather/canvas", "nomad"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/amalia.png",
@@ -108,11 +108,9 @@ const projects = [
     location: "Stockholm, Sweden", // TODO(Carl-Maurits): adjust
     description: "Clean geometry and subtle playfulness capture the energy of YONO SABO’s fusion concept.",
     details:
-`Restaurant in the heart of Stockholm Welcome to YONO SABO, the vibrant heart of Stockholm where the colorful streets of Asia meet the lively spirit of Mexican street food. YONO SABO promises an unforgettable culinary journey with a unique fusion of Asian and Mexican flavors. 
+`"YONO SABO\nFULL BRAND DEVELOPMENT\n\nYONO SABO is a restaurant in the heart of Stockholm where Asian flavors meet the bold, expressive world of Mexican street food. Rooted in street culture and crafted with precision, the menu blends traditions from both cuisines and reinterprets them with a modern edge.
 
-Nestled in the heart of the city, we invite you to dive into an authentic feast, where every bite is a tradition reimagined with a twist. Whether you crave the spicy kicks of Mexico or the subtle spices of Asia, we have something to satisfy your cravings. Visit us for an experience as eclectic and adventurous as our menu. Let YONO SABO be your go-to place for unforgettable culinary gatherings! Our logo stands out for its simplicity and personality. The double 'O's mimic eyes, making the logo memorable and engaging. 
-
-The well-spaced letters create a clear and balanced readability, while the minimalist style with rounded forms adds a modern touch. The logo serves both as a distinctive mark and an icon, practical for various uses. It reflects our restaurant's fusion of Asian and Mexican street food and appeals to a wide audience seeking a unique dining experience.`,
+Designed for sharing, discovery, and social dining, YONO SABO offers an energetic yet considered experience—where vibrant spices, contrasting textures, and unexpected combinations come together. It’s a place for curious palates, lively gatherings, and food that leaves a lasting impression.`,
     highlights: ["Brand concept blending Asian and Mexican street food culture", "Modern, versatile mark adaptable across digital and print", "Visual identity built on simplicity, warmth, and character"],
     tags: ["Photoshop", "Branding", "aftereffects", "wordpress"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/yono/bag.png",
@@ -136,9 +134,9 @@ The well-spaced letters create a clear and balanced readability, while the minim
     location: "Paris", // TODO(Carl-Maurits): add
     description: "A minimal identity that mirrors Lundi’s philosophy — simple, effective, and quietly confident.",
     details:
-`A Product for every day of the week In the Lundi skincare project, my goal was to create a design that showed off the brand's main ideas: simplicity, effectiveness, and a sense of new beginnings for those important Monday mornings. 
+`The design approach for Lundi is minimalist, functional, and intentional. The products are straightforward by nature, so the visual language avoids excess and focuses on clarity and balance. Packaging is clean and refined, allowing the product’s effectiveness to speak without distraction.
 
-The challenge was to make the brand look fresh and clear through its packaging and advertising designs. Project Design ApproachI chose a minimalist and practical design style for Lundi. The brand is all about straightforward skincare solutions, so it was important that the design reflected this. The packaging needed to be simple yet elegant, showing how effective the product is without any fuss.Using natural textures like crumpled paper and rock formations in their visuals, I played with the contrast between the ruggedness of nature and the smooth, clean lines of their bottles. It's a nod to use of natural ingredients without getting lost in the typical "green" aesthetic.`,
+Visuals combine natural textures—such as crumpled paper and rock formations—with smooth, structured bottle forms. This contrast references natural ingredients in a subtle way, avoiding predictable “green” cues while maintaining a modern, understated aesthetic..`,
     highlights: ["Minimal, functional packaging", "Natural textures", "Visual storytelling"],
     tags: ["Ads and marketing", "Graphical profile", "Product photos"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/Lundi/gras.png",
