@@ -158,13 +158,7 @@ Visuals combine natural textures—such as crumpled paper and rock formations—
     category: "Product design and marketing",
     location: "Nice, France", // TODO(Carl-Maurits): add
     description: "Design and marketing to bring products to life through visuals and digital storytelling.",
-details: `During my time at Corniche, I immersed myself in a creative environment, enhancing the brand’s marketing and social media presence. 
-
-
-I developed visual content, designed campaigns and been apart of the design process as well as produced digital media for various platforms. A major achievement was the "Heritage Chronograph" campaign, where I utilized Keyshot and Adobe Creative Suite to integrate artistic elements into our marketing. 
-I also created fresh social media content that increased engagement and drove website traffic.
-
-This experience taught me to navigate a high-pressure work environment while maintaining creative integrity. I honed my technical skills, improved my communication, and learned valuable lessons in time management and resilience. Overall, my time at Corniche significantly contributed to my professional growth in graphic design and marketing.`,
+details: `At Corniche, I worked across product design, marketing, and social media, contributing throughout the creative process. I helped design and build the Heritage Chronograph and played a key role in shaping its visual direction across campaigns and digital platforms. Using KeyShot and Adobe Creative Suite, I created campaign visuals and social content that strengthened engagement and supported brand growth. The role refined my ability to deliver clear, brand-focused work in a fast-paced environment while maintaining creative precision.`,
     highlights: ["Performance-focused design", "campaigns for digital platforms", "Heritage Chronograph marketing assets"],
     tags: ["Watchworld"],
     image: "https://hlzzteeryrwfhnpwhjiv.supabase.co/storage/v1/object/public/Portfolio%20test/corniche/cornichecover.png",
