@@ -108,7 +108,7 @@ const projects = [
     location: "Stockholm, Sweden", // TODO(Carl-Maurits): adjust
     description: "Clean geometry and subtle playfulness capture the energy of YONO SABO’s fusion concept.",
     details:
-`"YONO SABO\nFULL BRAND DEVELOPMENT\n\nYONO SABO is a restaurant in the heart of Stockholm where Asian flavors meet the bold, expressive world of Mexican street food. Rooted in street culture and crafted with precision, the menu blends traditions from both cuisines and reinterprets them with a modern edge.
+`YONO SABO\nFULL BRAND DEVELOPMENT\n\nYONO SABO is a restaurant in the heart of Stockholm where Asian flavors meet the bold, expressive world of Mexican street food. Rooted in street culture and crafted with precision, the menu blends traditions from both cuisines and reinterprets them with a modern edge.
 
 Designed for sharing, discovery, and social dining, YONO SABO offers an energetic yet considered experience—where vibrant spices, contrasting textures, and unexpected combinations come together. It’s a place for curious palates, lively gatherings, and food that leaves a lasting impression.`,
     highlights: ["Brand concept blending Asian and Mexican street food culture", "Modern, versatile mark adaptable across digital and print", "Visual identity built on simplicity, warmth, and character"],
