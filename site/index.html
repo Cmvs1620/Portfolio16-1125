@@ -564,7 +564,7 @@ fieldset.fld{border:0;margin:0;padding:0;min-width:0}
 
 <main>
   <header class="hero" id="top">
-    <p class="throw-hint lbl dim" aria-hidden="true"><i></i>Grab a letter and throw it</p>
+    <p class="throw-hint lbl dim"><i aria-hidden="true"></i>Creative designer · Alicante, ES</p>
     <h1 aria-label="Carl-Maurits">
       <span class="ln" data-split>Carl-</span>
       <span class="ln" data-split>Maurits</span>
@@ -1386,7 +1386,7 @@ copyBtn.addEventListener('click', () => {
       l.drag = true; active++; l.el.classList.add('grab');
       l.el.setPointerCapture(e.pointerId);
       l.ox = e.clientX - l.x; l.oy = e.clientY - l.y; l.hist = [[e.clientX, e.clientY, performance.now()]];
-      if (!hinted) { hinted = true; gsap.to('.throw-hint', { opacity: 0, duration: .6 }); }
+      hinted = true;
     });
     l.el.addEventListener('pointermove', e => {
       if (!l.drag) return;
